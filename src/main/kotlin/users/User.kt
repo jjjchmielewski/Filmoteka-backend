@@ -2,6 +2,10 @@ package users
 
 import comments.Comment
 import comments.CommentDTO
+import movies.attributes.Actor
+import movies.attributes.Director
+import movies.attributes.Genre
+import movies.attributes.Studio
 
 class User(
     var id: Int,
@@ -11,15 +15,15 @@ class User(
     var lastName: String,
     var email: String,
     var role: Role,
-    var favouriteGenre: List<Map<String, String>>,
-    var observedMovie: List<Map<String, String>>,
-    var observedActor: List<Map<String, String>>,
-    var observedStudio: List<Map<String, String>>,
-    var observedDirector: List<Map<String, String>>,
+    var favouriteGenre: List<Genre>,
+    var observedMovie: List<String>,
+    var observedActor: List<Actor>,
+    var observedStudio: List<Studio>,
+    var observedDirector: List<Director>,
     var commentCollection: List<Comment>
 ) {
     fun mapToDTO(): UserDTO {
-        val commentsDTO = mutableListOf<CommentDTO>()
+        val commentsDTO = mutableListOf<CommentDTO?>()
         commentCollection.forEach {
             commentsDTO.add(it.mapToDTO())
         }

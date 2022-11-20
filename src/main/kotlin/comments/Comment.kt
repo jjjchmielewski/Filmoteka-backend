@@ -1,21 +1,25 @@
 package comments
 
+import org.bson.types.ObjectId
 import java.time.Instant
 
-class Comment(
-    var id: Int,
-    var description: String,
-    var mark: Int,
-    var movieId: Int,
-    var dateTime: Instant
-) {
-    fun mapToDTO(): CommentDTO {
-        return CommentDTO(
-            id,
-            description,
-            mark,
-            movieId,
-            dateTime
-        )
+class Comment {
+    var id: ObjectId? = null
+    var description: String? = null
+    var mark: Int? = null
+    var movieId: Int? = null
+    var dateTime: Instant? = null
+
+    fun mapToDTO(): CommentDTO? {
+        return id?.let {
+            CommentDTO(
+                it,
+                description,
+                mark,
+                movieId,
+                dateTime
+            )
+        }
     }
 }
+

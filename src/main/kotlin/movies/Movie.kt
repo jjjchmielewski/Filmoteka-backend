@@ -2,23 +2,27 @@ package movies
 
 import comments.Comment
 import comments.CommentDTO
+import movies.attributes.Actor
+import movies.attributes.Director
+import movies.attributes.Genre
+import movies.attributes.Studio
+import org.bson.types.ObjectId
 
-class Movie(
-    var id: Int,
-    var name: String,
-    var mark: Int,
-    var year: Int,
-    var director: Map<String, String>,
-    var studioName: String,
-    var description: String,
-    var actors: List<Map<String, String>>,
-    var genre: List<Map<String, String>>,
-    var comments: List<Comment>,
-    var picture: String
-) {
+class Movie {
+    var id: ObjectId? = null
+    var name: String? = null
+    var mark: Int? = null
+    var year: Int? = null
+    var director: Director? = null
+    var studio: Studio? = null
+    var description: String? = null
+    var actors: List<Actor>? = null
+    var genre: List<Genre>? = null
+    var comments: List<Comment>? = null
+    var picture: String? = null
     fun mapToDTO(): MovieDTO {
-        val commentsDTO = mutableListOf<CommentDTO>()
-        comments.forEach {
+        val commentsDTO = mutableListOf<CommentDTO?>()
+        comments?.forEach {
             commentsDTO.add(it.mapToDTO())
         }
 
@@ -28,7 +32,7 @@ class Movie(
             mark,
             year,
             director,
-            studioName,
+            studio,
             description,
             actors,
             genre,

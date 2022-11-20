@@ -1,6 +1,10 @@
 package users
 
 import comments.CommentDTO
+import movies.attributes.Actor
+import movies.attributes.Director
+import movies.attributes.Genre
+import movies.attributes.Studio
 
 data class UserDTO (
     val id: Int,
@@ -8,10 +12,10 @@ data class UserDTO (
     val lastName: String,
     val email: String,
     val role: Role,
-    val favouriteGenre: List<Map<String, String>>,
-    val observedMovie: List<Map<String, String>>,
-    val observedActor: List<Map<String, String>>,
-    val observedStudio: List<Map<String, String>>,
-    val observedDirector: List<Map<String, String>>,
-    val commentCollection: List<CommentDTO>
+    val favouriteGenre: List<Genre>,
+    val observedMovie: List<String>,
+    val observedActor: List<Actor>,
+    val observedStudio: List<Studio>,
+    val observedDirector: List<Director>,
+    val commentCollection: List<CommentDTO?>
 )

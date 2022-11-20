@@ -1,5 +1,5 @@
 package users
 
-enum class Role {
-    ADMIN, MOD, USER
+class Role {
+    var role: String? = null
 }

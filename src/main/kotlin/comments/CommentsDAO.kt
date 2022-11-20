@@ -1,4 +1,0 @@
-package comments
-
-class CommentsDAO {
-}

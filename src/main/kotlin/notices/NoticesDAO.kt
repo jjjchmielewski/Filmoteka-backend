@@ -1,4 +1,0 @@
-package notices
-
-class NoticesDAO {
-}

@@ -1,4 +1,0 @@
-package movies
-
-class MoviesDAO {
-}

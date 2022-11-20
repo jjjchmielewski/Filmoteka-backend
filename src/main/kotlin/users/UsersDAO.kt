@@ -1,4 +1,0 @@
-package users
-
-class UsersDAO {
-}

@@ -1,13 +1,13 @@
-package movies
+package database.movies
 
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
-import comments.Comment
+import database.comments.Comment
 import database.MongoConnection
-import movies.attributes.Actor
-import movies.attributes.Director
-import movies.attributes.Genre
-import movies.attributes.Studio
+import database.movies.attributes.Actor
+import database.movies.attributes.Director
+import database.movies.attributes.Genre
+import database.movies.attributes.Studio
 import org.bson.conversions.Bson
 import org.bson.types.ObjectId
 
@@ -39,6 +39,10 @@ class MovieDAO {
             Filters.eq("director", Director(directorNames[0], directorNames[1])),
             Filters.elemMatch("actor", Filters.eq(Actor(actorNames[0], actorNames[1])))
         )).into(mutableListOf())
+    }
+
+    fun ranking(): List<Movie> {
+        return all().sortedByDescending { it.mark }.subList(0, 9)
     }
 
     fun update(

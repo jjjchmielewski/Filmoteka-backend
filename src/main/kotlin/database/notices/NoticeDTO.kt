@@ -1,4 +1,4 @@
-package notices
+package database.notices
 
 import org.bson.types.ObjectId
 

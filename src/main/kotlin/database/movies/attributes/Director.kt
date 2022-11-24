@@ -1,4 +1,4 @@
-package movies.attributes
+package database.movies.attributes
 
 class Director() {
     var directorFirstName: String? = null

@@ -1,6 +1,6 @@
 package api.users
 
-import users.UserDAO
+import database.users.UserDAO
 
 class UserEndpoints {
     companion object {

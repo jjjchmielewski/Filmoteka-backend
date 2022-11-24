@@ -1,6 +1,4 @@
-package comments
-
-import java.time.Instant
+package database.comments
 
 class Comment {
     var commentId: Int? = null

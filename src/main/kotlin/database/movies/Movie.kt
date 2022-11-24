@@ -1,11 +1,11 @@
-package movies
+package database.movies
 
-import comments.Comment
-import comments.CommentDTO
-import movies.attributes.Actor
-import movies.attributes.Director
-import movies.attributes.Genre
-import movies.attributes.Studio
+import database.comments.Comment
+import database.comments.CommentDTO
+import database.movies.attributes.Actor
+import database.movies.attributes.Director
+import database.movies.attributes.Genre
+import database.movies.attributes.Studio
 import org.bson.types.ObjectId
 
 class Movie() {

@@ -1,13 +1,13 @@
-package users
+package database.users
 
 import com.mongodb.client.model.Filters.eq
 import com.mongodb.client.model.Updates
 import database.MongoConnection
-import encryption.Encryptor
-import movies.attributes.Actor
-import movies.attributes.Director
-import movies.attributes.Genre
-import movies.attributes.Studio
+import app.common.encryption.Encryptor
+import database.movies.attributes.Actor
+import database.movies.attributes.Director
+import database.movies.attributes.Genre
+import database.movies.attributes.Studio
 import org.bson.conversions.Bson
 import org.bson.types.ObjectId
 import org.slf4j.Logger

@@ -1,4 +1,4 @@
-package notices
+package database.notices
 
 import com.mongodb.client.model.Filters.eq
 import com.mongodb.client.model.Updates

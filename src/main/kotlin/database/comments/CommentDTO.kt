@@ -1,4 +1,4 @@
-package comments
+package database.comments
 
 data class CommentDTO(
     val commentId: Int?,

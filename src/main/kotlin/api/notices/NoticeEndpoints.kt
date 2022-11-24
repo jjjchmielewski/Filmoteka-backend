@@ -1,6 +1,6 @@
 package api.notices
 
-import notices.NoticeDAO
+import database.notices.NoticeDAO
 
 class NoticeEndpoints {
     companion object {

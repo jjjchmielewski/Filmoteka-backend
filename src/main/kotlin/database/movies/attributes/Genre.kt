@@ -1,4 +1,4 @@
-package movies.attributes
+package database.movies.attributes
 
 class Genre() {
     var genreName: String? = null

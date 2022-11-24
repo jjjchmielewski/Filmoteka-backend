@@ -1,9 +1,6 @@
-package encryption
+package app.common.encryption
 
-import java.security.SecureRandom
 import java.util.Base64
-import javax.crypto.SecretKeyFactory
-import javax.crypto.spec.PBEKeySpec
 
 class Encryptor {
     companion object {

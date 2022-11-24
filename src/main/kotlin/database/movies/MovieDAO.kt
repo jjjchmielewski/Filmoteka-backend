@@ -42,7 +42,7 @@ class MovieDAO {
     }
 
     fun ranking(): List<Movie> {
-        return all().sortedByDescending { it.mark }.subList(0, 9)
+        return all().sortedByDescending { it.mark }.subList(0, 8)
     }
 
     fun update(

@@ -35,22 +35,41 @@ class UserDAO {
 
     fun update(
         id: String,
-        login: String?,
         password: String?,
         firstName: String?,
         lastName: String?,
-        email: String?,
-        role: String?
+        email: String?
     ) {
         val updateFields = mutableListOf<Bson>()
-        login?.let { updateFields.add(Updates.set("login", login)) }
         password?.let { updateFields.add(Updates.set("password", Encryptor.encrypt(password))) }
         firstName?.let { updateFields.add(Updates.set("firstName", firstName)) }
         lastName?.let { updateFields.add(Updates.set("lastName", lastName)) }
         email?.let { updateFields.add(Updates.set("email", email)) }
-        role?.let { updateFields.add(Updates.set("role", role)) }
 
         usersCollection.updateOne(eq("_id", ObjectId(id)), Updates.combine(updateFields))
+    }
+
+    fun updateRole(id: String, role: String): Boolean {
+        when (role) {
+            "USER" -> {
+                usersCollection.updateOne(eq("_id", ObjectId(id)), Updates.set("role", "USER"))
+                return true
+            }
+
+            "MOD" -> {
+                usersCollection.updateOne(eq("_id", ObjectId(id)), Updates.set("role", "MOD"))
+                return true
+            }
+
+            "ADMIN" -> {
+                usersCollection.updateOne(eq("_id", ObjectId(id)), Updates.set("role", "ADMIN"))
+                return true
+            }
+
+            else -> {
+                return false
+            }
+        }
     }
 
     fun addFavouriteGenre(id: String, genre: Genre) {

@@ -23,6 +23,11 @@ class NoticeDAO {
         noticesCollection.insertOne(notice)
     }
 
+    fun news(): List<Notice> {
+        val list = all()
+        return list.subList(list.size - 3, list.size - 1).reversed()
+    }
+
     fun update(
         id: String,
         title: String?,

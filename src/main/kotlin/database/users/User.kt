@@ -29,8 +29,7 @@ class User() {
         password: String,
         firstName: String,
         lastName: String,
-        email: String,
-        role: String
+        email: String
     ) : this() {
         this._id = ObjectId.get()
         this.login = login
@@ -38,7 +37,6 @@ class User() {
         this.firstName = firstName
         this.lastName = lastName
         this.email = email
-        this.role = role
     }
 
     fun mapToDTO(): UserDTO {

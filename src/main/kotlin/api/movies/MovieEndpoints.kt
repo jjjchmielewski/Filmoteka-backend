@@ -19,7 +19,7 @@ class MovieEndpoints {
 
         fun initialize() {
 
-            path("/database/movies") {
+            path("/movies") {
 
                 get("") { request, response ->
                     if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {

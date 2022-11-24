@@ -37,7 +37,11 @@ class Authorization {
             }
         }
 
-        fun getUserFromBasicAuth(value: String): User? {
+        fun getValidatedUser(value: String): User? {
+            return getUserFromBasicAuth(value)
+        }
+
+        private fun getUserFromBasicAuth(value: String): User? {
             val credentials: List<String>
             try {
                 val authString = value.substring(6)

@@ -1,9 +1,7 @@
 package users
 
-import com.mongodb.client.FindIterable
 import com.mongodb.client.model.Filters.eq
 import com.mongodb.client.model.Updates
-import comments.Comment
 import database.MongoConnection
 import encryption.Encryptor
 import movies.attributes.Actor
@@ -31,6 +29,10 @@ class UserDAO {
         usersCollection.insertOne(user)
     }
 
+    fun findByLogin(login: String): User? {
+        return usersCollection.find(eq("login", login)).first()
+    }
+
     fun update(
         id: String,
         login: String?,
@@ -38,7 +40,7 @@ class UserDAO {
         firstName: String?,
         lastName: String?,
         email: String?,
-        role: Role?
+        role: String?
     ) {
         val updateFields = mutableListOf<Bson>()
         login?.let { updateFields.add(Updates.set("login", login)) }
@@ -69,6 +71,10 @@ class UserDAO {
 
     fun addObservedDirector(id: String, director: Director) {
         usersCollection.updateOne(eq("_id", ObjectId(id)), Updates.addToSet("observedDirector", director))
+    }
+
+    fun delete(id: String) {
+        usersCollection.deleteOne(eq("_id", ObjectId(id)))
     }
 
     companion object {

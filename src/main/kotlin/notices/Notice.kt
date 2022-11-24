@@ -2,8 +2,8 @@ package notices
 
 import org.bson.types.ObjectId
 
-class Notice {
-    var id: ObjectId? = null
+class Notice() {
+    var _id: ObjectId? = null
     var title: String? = null
     var description: String? = null
     var picture: String? = null
@@ -12,15 +12,15 @@ class Notice {
         title: String,
         description: String,
         picture: String
-    ) {
-        this.id = ObjectId.get()
+    ) : this() {
+        this._id = ObjectId.get()
         this.title = title
         this.description = description
         this.picture = picture
     }
 
     fun mapToDTO(): NoticeDTO? {
-        return id?.let {
+        return _id?.let {
             NoticeDTO(
                 it,
                 title,

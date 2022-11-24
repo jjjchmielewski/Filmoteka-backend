@@ -1,6 +1,11 @@
 package movies.attributes
 
-class Actor {
+class Actor() {
     var actorFirstName: String? = null
     var actorLastName: String? = null
+
+    constructor(firstName: String, lastName: String): this() {
+        actorFirstName = firstName
+        actorLastName = lastName
+    }
 }

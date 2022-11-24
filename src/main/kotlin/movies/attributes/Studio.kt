@@ -1,5 +1,9 @@
 package movies.attributes
 
-class Studio {
+class Studio() {
     var studioName: String? = null
+
+    constructor(name: String): this() {
+        studioName = name
+    }
 }

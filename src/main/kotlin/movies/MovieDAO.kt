@@ -26,6 +26,21 @@ class MovieDAO {
         moviesCollection.insertOne(movie)
     }
 
+    fun findByName(name: String): List<Movie> {
+        return moviesCollection.find(Filters.regex("name", ".*$name.*")).into(mutableListOf())
+    }
+
+    fun search(name: String, year: Int, director: String, actor: String): List<Movie> {
+        val directorNames = director.split(" ")
+        val actorNames = actor.split(" ")
+        return moviesCollection.find(Filters.and(
+            Filters.regex("name",".*$name.*"),
+            Filters.eq("year", year),
+            Filters.eq("director", Director(directorNames[0], directorNames[1])),
+            Filters.elemMatch("actor", Filters.eq(Actor(actorNames[0], actorNames[1])))
+        )).into(mutableListOf())
+    }
+
     fun update(
         id: String,
         name: String?,
@@ -58,5 +73,9 @@ class MovieDAO {
 
     fun allMovieComments(id: String): List<Comment>? {
         return moviesCollection.find(Filters.eq("_id", ObjectId(id))).first()?.comments
+    }
+
+    fun delete(id: String) {
+        moviesCollection.deleteOne(Filters.eq("_id", ObjectId(id)))
     }
 }

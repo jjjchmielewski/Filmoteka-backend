@@ -91,6 +91,7 @@ class MovieEndpoints {
                 post("/add") { request, response ->
                     if (Authorization.validateModerator(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
                         val movie = Gson().fromJson(request.body(), Movie::class.java)
+                        movie.completeMovieObject()
                         movieDAO.add(movie)
                         response.status(201)
                         "New movie added"

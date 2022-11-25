@@ -37,6 +37,22 @@ class User() {
         this.firstName = firstName
         this.lastName = lastName
         this.email = email
+        this.completeUserProfile()
+    }
+
+    fun completeUserProfile() {
+        this.role = "USER"
+        this.favouriteGenre = mutableListOf()
+        this.observedMovie = mutableListOf()
+        this.observedActor = mutableListOf()
+        this.observedStudio = mutableListOf()
+        this.observedDirector = mutableListOf()
+        this.commentCollection = mutableListOf()
+    }
+
+    fun encryptPassword() {
+        val encryptedPass = password?.let { Encryptor.encrypt(it) }
+        this.password = encryptedPass
     }
 
     fun mapToDTO(): UserDTO {

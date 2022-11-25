@@ -16,7 +16,7 @@ class Movie() {
     var director: Director? = null
     var studio: Studio? = null
     var description: String? = null
-    var actors: List<Actor>? = null
+    var actor: List<Actor>? = null
     var genre: List<Genre>? = null
     var comments: List<Comment>? = null
     var picture: String? = null
@@ -38,9 +38,14 @@ class Movie() {
         this.director = director
         this.studio = studio
         this.description = description
-        this.actors = actors
+        this.actor = actors
         this.genre = genre
         this.picture = picture
+        completeMovieObject()
+    }
+
+    fun completeMovieObject() {
+        this.comments = mutableListOf()
     }
 
     fun mapToDTO(): MovieDTO {
@@ -57,7 +62,7 @@ class Movie() {
             director,
             studio,
             description,
-            actors,
+            actor,
             genre,
             commentsDTO,
             picture

@@ -17,7 +17,7 @@ class NoticeEndpoints {
 
                 get("") { request, response ->
                     if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
-                        Gson().toJson(noticeDAO.all().forEach { it.mapToDTO() })
+                        Gson().toJson(noticeDAO.all().map { it.mapToDTO() })
                     } else {
                         response.status(401)
                         "Bad credentials"
@@ -26,7 +26,7 @@ class NoticeEndpoints {
 
                 get("/news") { request, response ->
                     if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
-                        Gson().toJson(noticeDAO.news().forEach { it.mapToDTO() })
+                        Gson().toJson(noticeDAO.news().map { it.mapToDTO() })
                     } else {
                         response.status(401)
                         "Bad credentials"

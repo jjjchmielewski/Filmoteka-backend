@@ -10,7 +10,7 @@ import database.movies.attributes.Studio
 import org.bson.types.ObjectId
 
 class User() {
-    var _id: ObjectId? = null
+    var id: ObjectId? = null
     var login: String? = null
     var password: String? = null
     var firstName: String? = null
@@ -31,7 +31,7 @@ class User() {
         lastName: String,
         email: String
     ) : this() {
-        this._id = ObjectId.get()
+        this.id = ObjectId.get()
         this.login = login
         this.password = Encryptor.encrypt(password)
         this.firstName = firstName
@@ -62,7 +62,7 @@ class User() {
         }
 
         return UserDTO(
-            _id,
+            id,
             firstName,
             lastName,
             email,

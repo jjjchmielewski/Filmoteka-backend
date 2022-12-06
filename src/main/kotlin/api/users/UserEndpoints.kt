@@ -20,7 +20,7 @@ class UserEndpoints {
         fun initialize() {
 
             post("/login") { request, response ->
-                if (Authorization.validateModerator(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
+                if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
                     response.status(200)
                     "Login confirmed"
                 } else {
@@ -64,7 +64,7 @@ class UserEndpoints {
                         val type = object : TypeToken<Map<String, String>>() {}.type
                         val userParamsMap = Gson().fromJson<Map<String, String>>(request.body(), type)
                         if (Authorization.validateModerator(request.headers(HttpHeader.AUTHORIZATION.asString()))
-                            || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?._id == ObjectId(
+                            || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?.id == ObjectId(
                                 userParamsMap["id"]
                             )
                         ) {
@@ -87,7 +87,7 @@ class UserEndpoints {
 
                 put("/favourite/genre") { request, response ->
                     if (Authorization.validateModerator(request.headers(HttpHeader.AUTHORIZATION.asString()))
-                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?._id == ObjectId(
+                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?.id == ObjectId(
                             request.queryParams("id")
                         )) {
                         userDAO.addFavouriteGenre(request.queryParams("id"), Genre(request.queryParams("genre")))
@@ -101,7 +101,7 @@ class UserEndpoints {
 
                 put("/observed/movie") { request, response ->
                     if (Authorization.validateModerator(request.headers(HttpHeader.AUTHORIZATION.asString()))
-                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?._id == ObjectId(
+                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?.id == ObjectId(
                             request.queryParams("id")
                         )) {
                         userDAO.addObservedMovie(request.queryParams("id"), request.queryParams("movie_id"))
@@ -115,7 +115,7 @@ class UserEndpoints {
 
                 put("/observed/actor") { request, response ->
                     if (Authorization.validateModerator(request.headers(HttpHeader.AUTHORIZATION.asString()))
-                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?._id == ObjectId(
+                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?.id == ObjectId(
                             request.queryParams("id")
                         )) {
                         userDAO.addObservedActor(
@@ -134,7 +134,7 @@ class UserEndpoints {
 
                 put("/observed/director") { request, response ->
                     if (Authorization.validateModerator(request.headers(HttpHeader.AUTHORIZATION.asString()))
-                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?._id == ObjectId(
+                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?.id == ObjectId(
                             request.queryParams("id")
                         )) {
                         userDAO.addObservedDirector(
@@ -153,7 +153,7 @@ class UserEndpoints {
 
                 put("/observed/studio") { request, response ->
                     if (Authorization.validateModerator(request.headers(HttpHeader.AUTHORIZATION.asString()))
-                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?._id == ObjectId(
+                        || Authorization.getValidatedUser(request.headers(HttpHeader.AUTHORIZATION.asString()))?.id == ObjectId(
                             request.queryParams("id")
                         )) {
                         userDAO.addObservedStudio(request.queryParams("id"), Studio(request.queryParams("studio")))

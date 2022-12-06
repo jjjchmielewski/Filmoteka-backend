@@ -40,13 +40,9 @@ class MovieEndpoints {
                 }
 
                 get("/news") { request, response ->
-                    if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
-                        val allMovies = movieDAO.all()
-                        Gson().toJson(allMovies.subList(allMovies.size - 3, allMovies.lastIndex).map { it.mapToDTO() })
-                    } else {
-                        response.status(401)
-                        "Bad credentials"
-                    }
+                    val allMovies = movieDAO.all()
+                    Gson().toJson(allMovies.subList(allMovies.size - 5, allMovies.lastIndex).map { it.mapToDTO() })
+
                 }
 
                 get("/name/:name") { request, response ->

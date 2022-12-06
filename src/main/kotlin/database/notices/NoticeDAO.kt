@@ -25,7 +25,7 @@ class NoticeDAO {
 
     fun news(): List<Notice> {
         val list = all()
-        return list.subList(list.size - 3, list.size - 1).reversed()
+        return list.subList(list.size - 5, list.size - 1).reversed()
     }
 
     fun update(

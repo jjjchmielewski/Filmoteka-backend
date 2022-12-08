@@ -21,8 +21,8 @@ class UserEndpoints {
 
             post("/login") { request, response ->
                 if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
+                    Gson().toJson(userDAO.findByAuthorization(request.headers(HttpHeader.AUTHORIZATION.asString())))
                     response.status(200)
-                    "Login confirmed"
                 } else {
                     response.status(401)
                     "Bad credentials"

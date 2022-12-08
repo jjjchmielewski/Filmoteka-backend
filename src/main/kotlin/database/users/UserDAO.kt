@@ -12,6 +12,8 @@ import org.bson.conversions.Bson
 import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.lang.reflect.MalformedParametersException
+import java.util.*
 
 class UserDAO {
     private val usersCollection = MongoConnection.getDatabase().getCollection("user", User::class.java)
@@ -31,6 +33,19 @@ class UserDAO {
 
     fun findByLogin(login: String): User? {
         return usersCollection.find(eq("login", login)).first()
+    }
+
+    fun findByAuthorization(value: String): User? {
+        val credentials: List<String>
+        try {
+            val authString = value.substring(6)
+            val decodedAuthString = String(Base64.getDecoder().decode(authString))
+            credentials = decodedAuthString.split(":")
+        } catch (exception: Exception) {
+            throw MalformedParametersException("Basic auth string is malformed")
+        }
+
+        return findByLogin(credentials[0])
     }
 
     fun update(

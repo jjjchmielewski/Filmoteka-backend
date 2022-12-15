@@ -30,15 +30,43 @@ class MovieDAO {
         return moviesCollection.find(Filters.regex("name", ".*$name.*")).into(mutableListOf())
     }
 
-    fun search(name: String, year: Int, director: String, actor: String): List<Movie> {
-        val directorNames = director.split(" ")
-        val actorNames = actor.split(" ")
-        return moviesCollection.find(Filters.and(
-            Filters.regex("name",".*$name.*"),
-            Filters.eq("year", year),
-            Filters.eq("director", Director(directorNames[0], directorNames[1])),
-            Filters.elemMatch("actor", Filters.eq(Actor(actorNames[0], actorNames[1])))
-        )).into(mutableListOf())
+    fun search(name: String?, year: Int?, director: String?, actor: String?): List<Movie> {
+
+        return moviesCollection.find(
+            Filters.and(
+                name.let {
+                    if (it != null) {
+                        Filters.regex("name", ".*($it).*")
+                    } else {
+                        Filters.exists("name")
+                    }
+                },
+                year.let {
+                    if (it != null) {
+                        Filters.eq("year", it)
+                    } else {
+                        Filters.exists("year")
+                    }
+                },
+                director.let {
+                    if (it != null) {
+                        val directorNames = it.split(" ")
+                        Filters.eq("director", Director(directorNames[0], directorNames[1]))
+                    } else {
+                        Filters.exists("director")
+                    }
+                },
+                actor.let {
+                    if (it != null) {
+                        val actorNames = it.split(" ")
+                        Filters.elemMatch("actor", Filters.eq(Actor(actorNames[0], actorNames[1])))
+                    } else {
+                        Filters.exists("actor")
+                    }
+                }
+
+            )
+        ).into(mutableListOf())
     }
 
     fun ranking(): List<Movie> {
@@ -56,7 +84,7 @@ class MovieDAO {
         actors: List<Actor>?,
         genre: List<Genre>?,
         picture: String?
-        ) {
+    ) {
         val updateFields = mutableListOf<Bson>()
         name?.let { Updates.set("name", name) }
         mark?.let { Updates.set("mark", mark) }

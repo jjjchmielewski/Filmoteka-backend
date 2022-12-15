@@ -55,10 +55,10 @@ class MovieEndpoints {
                 }
 
                 get("/search") { request, response ->
-                    if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
+                    if (request != null) {
                         val result = movieDAO.search(
                             request.queryParams("name"),
-                            request.queryParams("year").toInt(),
+                            request.queryParams("year")?.toInt(),
                             request.queryParams("director"),
                             request.queryParams("actor")
                         ).map { it.mapToDTO() }
@@ -68,19 +68,18 @@ class MovieEndpoints {
                             response.status(404)
                             "Movies with requested params not found"
                         }
-
                     } else {
-                        response.status(401)
-                        "Bad credentials"
+                        response.status(400)
+                        "Bad request"
                     }
                 }
 
                 get("/ranking") { request, response ->
-                    if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
+                    if (request != null) {
                         Gson().toJson(movieDAO.ranking().map { it.mapToDTO() })
                     } else {
-                        response.status(401)
-                        "Bad credentials"
+                        response.status(400)
+                        "Bad request"
                     }
                 }
 
@@ -99,7 +98,7 @@ class MovieEndpoints {
 
                 put("/update/:id") { request, response ->
                     if (Authorization.validateModerator(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
-                        val type = object:TypeToken<Map<String, Any>>(){}.type
+                        val type = object : TypeToken<Map<String, Any>>() {}.type
                         val movieParamsMap = Gson().fromJson<Map<String, Any>>(request.body(), type)
                         movieDAO.update(
                             id = movieParamsMap["id"] as String,
@@ -144,8 +143,6 @@ class MovieEndpoints {
                     }
                 }
             }
-
-
 
 
         }

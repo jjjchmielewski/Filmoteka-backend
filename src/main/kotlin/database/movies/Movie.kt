@@ -46,6 +46,14 @@ class Movie() {
 
     fun completeMovieObject() {
         this.comments = mutableListOf()
+        this.mark = this.mark ?: 0
+        this.year = this.year ?: 0
+        this.director = this.director ?: Director()
+        this.studio = this.studio ?: Studio()
+        this.description = this.description ?: ""
+        this.actor = this.actor ?: mutableListOf()
+        this.genre = this.genre ?: mutableListOf()
+        this.picture = this.picture ?: ""
     }
 
     fun mapToDTO(): MovieDTO {

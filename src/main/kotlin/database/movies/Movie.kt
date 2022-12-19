@@ -63,7 +63,7 @@ class Movie() {
         }
 
         return MovieDTO(
-            id,
+            id.toString(),
             name,
             mark,
             year,

@@ -123,6 +123,7 @@ class MovieEndpoints {
                 post("/comment/:id") { request, response ->
                     if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
                         val comment = Gson().fromJson(request.body(), Comment::class.java)
+                        comment.completeComment(request.params("id"))
                         movieDAO.addComment(request.params("id"), comment)
                         response.status(201)
                         "New comment added"

@@ -1,10 +1,10 @@
 package database.comments
 
 data class CommentDTO(
-    val commentId: Int?,
+    val commentId: String?,
     val commentDescription: String?,
     val commentMark: Int?,
-    val commentMovieId: Int?,
-    val commentUser: Int?,
+    val commentMovieId: String?,
+    val commentUser: String?,
     val commentDateTime: String?
 )

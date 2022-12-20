@@ -22,7 +22,7 @@ class UserEndpoints {
             post("/login") { request, response ->
                 if (Authorization.validateUser(request.headers(HttpHeader.AUTHORIZATION.asString()))) {
                     response.status(200)
-                    return@post Gson().toJson(userDAO.findByAuthorization(request.headers(HttpHeader.AUTHORIZATION.asString())))
+                    return@post Gson().toJson(userDAO.findByAuthorization(request.headers(HttpHeader.AUTHORIZATION.asString()))?.mapToDTO())
                 } else {
                     response.status(401)
                     "Bad credentials"

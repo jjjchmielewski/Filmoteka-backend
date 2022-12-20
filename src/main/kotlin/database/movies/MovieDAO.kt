@@ -104,7 +104,7 @@ class MovieDAO {
     }
 
     fun allMovieComments(id: String): List<Comment>? {
-        return moviesCollection.find(Filters.eq("_id", ObjectId(id))).first()?.comments
+        return moviesCollection.find(Filters.eq("_id", ObjectId(id))).first()?.comment
     }
 
     fun delete(id: String) {

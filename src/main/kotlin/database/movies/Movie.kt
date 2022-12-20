@@ -18,7 +18,7 @@ class Movie() {
     var description: String? = null
     var actor: List<Actor>? = null
     var genre: List<Genre>? = null
-    var comments: List<Comment>? = null
+    var comment: List<Comment>? = null
     var picture: String? = null
 
     constructor(
@@ -45,7 +45,7 @@ class Movie() {
     }
 
     fun completeMovieObject() {
-        this.comments = mutableListOf()
+        this.comment = this.comment ?: mutableListOf()
         this.mark = this.mark ?: 0
         this.year = this.year ?: 0
         this.director = this.director ?: Director()
@@ -58,7 +58,7 @@ class Movie() {
 
     fun mapToDTO(): MovieDTO {
         val commentsDTO = mutableListOf<CommentDTO?>()
-        comments?.forEach {
+        comment?.forEach {
             commentsDTO.add(it.mapToDTO())
         }
 

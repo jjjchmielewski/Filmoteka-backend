@@ -5,10 +5,9 @@ import database.movies.attributes.Actor
 import database.movies.attributes.Director
 import database.movies.attributes.Genre
 import database.movies.attributes.Studio
-import org.bson.types.ObjectId
 
 data class UserDTO (
-    val id: ObjectId?,
+    val id: String?,
     val firstName: String?,
     val lastName: String?,
     val email: String?,

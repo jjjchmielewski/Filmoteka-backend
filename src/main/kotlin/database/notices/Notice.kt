@@ -22,7 +22,7 @@ class Notice() {
     fun mapToDTO(): NoticeDTO? {
         return id?.let {
             NoticeDTO(
-                it,
+                it.toString(),
                 title,
                 description,
                 picture

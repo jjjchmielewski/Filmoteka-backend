@@ -62,7 +62,7 @@ class User() {
         }
 
         return UserDTO(
-            id,
+            id.toString(),
             firstName,
             lastName,
             email,

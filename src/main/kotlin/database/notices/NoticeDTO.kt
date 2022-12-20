@@ -1,9 +1,7 @@
 package database.notices
 
-import org.bson.types.ObjectId
-
 data class NoticeDTO(
-    val id: ObjectId?,
+    val id: String?,
     val title: String?,
     val description: String?,
     val picture: String?
